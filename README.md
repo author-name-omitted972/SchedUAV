@@ -2,7 +2,7 @@
 ```text
 This is an end-to-end evaluation framework for UAVs developed by Sun Yat-sen University.
 ```
----
+
 
 ## Project Layout
 
@@ -28,15 +28,15 @@ SCHEDUAV/
 
 
 ```bash
-#克隆仓库
+#Clone the repository
 git clone https://github.com/author-name-omitted972/SchedUAV.git --recursive
 cd SchedUAV
 git submodule update --init --recursive
 
-# ROS安装
+# Install ROS
 wget http://fishros.com/install -O fishros && . fishros
 
-# ROS依赖
+# ROS dependencies
 sudo apt update
 sudo apt install -y build-essential cmake git python3-catkin-tools \
   libpcl-dev libeigen3-dev libgoogle-glog-dev libgflags-dev \
@@ -196,4 +196,5 @@ export AUTOPILOT_USER=<ssh-username>
 ## License
 
 Apache-2.0
+
 
