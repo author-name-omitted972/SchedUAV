@@ -130,13 +130,9 @@ catkin_make && source devel/setup.sh
 ```bash
 cd Scheduler/build
 cmake .. && make
-sudo ./cfs
-sudo ./rms
-sudo ./edf
 
 cd StressCPU/build
 cmake .. && make
-sudo cset shield --exec -- ./StressCPU --cpu 4,5,6,7 --no-stagger --period 1 0.1 4
 ```
 
 ---
@@ -168,6 +164,11 @@ roslaunch Launch/Gazebo.launch world_name:=${REPO_ROOT}/World/Forest.world
 **Board**
 
 ```bash
+# System Setup
+sudo cset shield --cpu 4-7 --kthread on
+echo 0 | sudo tee /sys/fs/cgroup/cpuset/cpuset.sched_load_balance
+echo -1 | sudo tee /proc/sys/kernel/sched_rt_runtime_us
+
 # Start the uploaded PX4
 cd ~/px4
 sudo ./bin/px4 -s HITL.config
@@ -178,6 +179,16 @@ roslaunch ego_planner single_run_in_exp.launch
 rosrun ego_planner offboard_control
 rosrun ego_planner pub_goal
 roslaunch Launch/Mavros.launch
+
+# Scheduler
+cd Scheduler/build
+sudo ./cfs
+sudo ./rms
+sudo ./edf
+
+# StressCPU
+cd StressCPU/build
+sudo cset shield --exec -- ./StressCPU --cpu 4,5,6,7 --no-stagger --period 1 0.1 4
 ```
 
 ---
@@ -211,6 +222,7 @@ export AUTOPILOT_USER=<ssh-username>
 ## License
 
 Apache-2.0
+
 
 
 
