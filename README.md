@@ -125,6 +125,20 @@ cd ../egoplanner_ws && rosdep install --from-paths src --ignore-src -r
 catkin_make && source devel/setup.sh
 ```
 
+### 3) Scheduler and Stressor
+
+```bash
+cd Scheduler/build
+cmake .. && make
+sudo ./cfs
+sudo ./rms
+sudo ./edf
+
+cd StressCPU/build
+cmake .. && make
+sudo cset shield --exec -- ./StressCPU --cpu 4,5,6,7 --no-stagger --period 1 0.1 4
+```
+
 ---
 
 ## Run (HITL: Host simulation + Board PX4)
@@ -197,6 +211,7 @@ export AUTOPILOT_USER=<ssh-username>
 ## License
 
 Apache-2.0
+
 
 
 
