@@ -19,6 +19,8 @@ SCHEDUAV/
 ├─ Launch/                 # Gazebo launch (e.g., Gazebo.launch)
 ├─ Model/                  # Custom models
 ├─ World/                  # Custom worlds (e.g., Forest.world)
+├─ Scheduler/              # Custom scheduler (e.g., CFS, RM, EDF)
+├─ StressCPU/              # CPU interference
 └─ README.md
 ```
 
@@ -222,6 +224,7 @@ export AUTOPILOT_USER=<ssh-username>
 ## License
 
 Apache-2.0
+
 
 
 
