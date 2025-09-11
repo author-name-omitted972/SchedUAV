@@ -68,7 +68,7 @@ SCHEDUAV/
 
 ```bash
 # 1) Clone (replace with your remote if needed)
-git clone https://github.com/author-name-omitted972/PaperCode.git
+git clone https://github.com/author-name-omitted972/SchedUAV.git --recursive
 cd SCHEDUAV
 
 # 2) Common dependencies
@@ -228,3 +228,4 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<PX4>/build/px4_sitl_default/build_gazeb
 ```text
 Apache-2.0
 ```
+
