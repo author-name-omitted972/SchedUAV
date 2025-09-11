@@ -8,7 +8,7 @@ This is an end-to-end evaluation framework for UAVs developed by Sun Yat-sen Uni
 
 ```text
 SCHEDUAV/
-├─ PX4-Autopilot/          # PX4 source & builds (SITL/HITL)
+├─ PX4-Autopilot/          # PX4 source & builds
 ├─ Livox-SDK2/             # Livox driver SDK
 ├─ ROS/
 │  ├─ livox_ws/            # livox_ros_driver2
@@ -224,6 +224,7 @@ export AUTOPILOT_USER=<ssh-username>
 ## License
 
 Apache-2.0
+
 
 
 
