@@ -52,8 +52,6 @@ sudo rosdep init || true
 rosdep update
 ```
 
-> Note: the board only requires runtime libraries; 3D simulation runs on the Host.
-
 (Optional) RK3588S graphics runtime fix:
 
 ```bash
@@ -127,11 +125,23 @@ cd ../egoplanner_ws && rosdep install --from-paths src --ignore-src -r
 catkin_make && source devel/setup.sh
 ```
 
-> If the board connects sensors directly (e.g., Livox), configure device permissions and IP per the driver docs.
-
 ---
 
 ## Run (HITL: Host simulation + Board PX4)
+
+**Network**
+
+# Host(~/.bashrc or Every Terminal)
+```bash
+export ROS_IP=HOST_IP
+roscore
+```
+
+# Board(~/.bashrc or Every Terminal)
+```bash
+export ROS_MASTER_URI=http://HOST_IP:11311/
+export ROS_IP=BOARD_IP
+```
 
 **Host**
 
@@ -139,31 +149,22 @@ catkin_make && source devel/setup.sh
 # Gazebo world (folders are Launch/Model/World)
 REPO_ROOT=$(pwd)
 roslaunch Launch/Gazebo.launch world_name:=${REPO_ROOT}/World/Forest.world
-# Optionally, start Realsense/Mid360 plugin launch files
 ```
 
 **Board**
 
 ```bash
-# Start the uploaded PX4 (your script/service)
-# e.g., ./start_px4.sh
+# Start the uploaded PX4
+cd ~/px4
+sudo ./bin/px4 -s HITL.config
 
 # Board-side task chain
-roslaunch livox_ros_driver2 livox_lidar.launch
 roslaunch fast_lio mapping_mid360.launch
 roslaunch ego_planner single_run_in_exp.launch
-```
-
-**Host**
-
-```bash
-roslaunch mavros px4.launch
-# Control/goal (example)
 rosrun ego_planner offboard_control
 rosrun ego_planner pub_goal
+roslaunch Launch/Mavros.launch
 ```
-
-> Networking: keep MAVLink/MAVROS ports reachable; for multi-machine ROS set `ROS_MASTER_URI` / `ROS_IP`.
 
 ---
 
@@ -196,5 +197,6 @@ export AUTOPILOT_USER=<ssh-username>
 ## License
 
 Apache-2.0
+
 
 
