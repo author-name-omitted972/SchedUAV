@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="MyBox">
+    <static>true</static>
+
+    <link name="link">
+
+      <!-- 可视网格 -->
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://MyBox/meshes/MyBox.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <!-- 碰撞网格 -->
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://MyBox/meshes/MyBox.dae</uri>
+          </mesh>
+        </geometry>
+      </collision>
+
+    </link>
+  </model>
+</sdf>
