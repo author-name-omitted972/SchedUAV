@@ -131,14 +131,14 @@ catkin_make && source devel/setup.sh
 
 **Network**
 
-# Host(~/.bashrc or Every Terminal)
 ```bash
+# Host(~/.bashrc or Every Terminal)
 export ROS_IP=HOST_IP
 roscore
 ```
 
-# Board(~/.bashrc or Every Terminal)
 ```bash
+# Board(~/.bashrc or Every Terminal)
 export ROS_MASTER_URI=http://HOST_IP:11311/
 export ROS_IP=BOARD_IP
 ```
@@ -197,6 +197,7 @@ export AUTOPILOT_USER=<ssh-username>
 ## License
 
 Apache-2.0
+
 
 
 
