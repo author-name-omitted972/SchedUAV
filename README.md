@@ -191,6 +191,10 @@ sudo ./edf
 # StressCPU
 cd StressCPU/build
 sudo cset shield --exec -- ./StressCPU --cpu 4,5,6,7 --no-stagger --period 1 0.1 4
+
+# Trace
+sudo trace-cmd record -b 65536 -M F0 -e sched_wakeup -e sys_enter_kill
+sudo trace-cmd report -F 'sys_enter_kill' -F 'sched_wakeup' -i trace.dat > trace.txt
 ```
 
 ---
@@ -224,6 +228,7 @@ export AUTOPILOT_USER=<ssh-username>
 ## License
 
 Apache-2.0
+
 
 
 
