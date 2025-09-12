@@ -18,32 +18,12 @@ This repository provides a small C++ utility, **ThreadCtl**, and three sample pr
 - `RMS.cpp` shows how to assign **SCHED_FIFO** priorities for a rate‑monotonic style setup.
 - `EDF.cpp` shows how to assign **SCHED_DEADLINE** with runtime, deadline, and period in **nanoseconds**.
 
-## Build
-
-You can build with any recent GCC or Clang on Linux. No special libraries are required.
-
-```bash
-# Build the utility into standalone demos
-g++ -O2 -std=gnu++17 -o CFS CFS.cpp ThreadCtl.cpp
-g++ -O2 -std=gnu++17 -o RMS RMS.cpp ThreadCtl.cpp
-g++ -O2 -std=gnu++17 -o EDF EDF.cpp ThreadCtl.cpp
-```
-
-> You may prefer `-static-libstdc++ -static-libgcc` on embedded targets, if available.
 
 ## Run requirements
 
 1. Linux with support for `sched_setattr`. Most modern kernels qualify.
 2. Sufficient privileges to change scheduling policy and to write to cpuset. Running as `root` is the simplest option.
 3. A cpuset cgroup named `user` must exist and be configured. Example setup:
-
-```bash
-sudo mkdir -p /sys/fs/cgroup/cpuset/user
-echo 0-7 | sudo tee /sys/fs/cgroup/cpuset/user/cpuset.cpus
-echo 0   | sudo tee /sys/fs/cgroup/cpuset/user/cpuset.mems
-# Optional but common in real-time experiments
-echo 1   | sudo tee /sys/fs/cgroup/cpuset/user/cpuset.cpu_exclusive 2>/dev/null || true
-```
 
 If your system uses cgroup v2, adapt the cpuset path or mount a v1 cpuset hierarchy for experiments.
 
@@ -136,19 +116,3 @@ Out‑of‑range inputs are clamped to valid ranges inside the helper.
 - The tool scans `/proc/<pid>/task/*/comm` and finds the first thread whose name equals the provided string.
 - The name comparison is exact. Be sure that your application sets meaningful thread names, for example with `pthread_setname_np`.
 - If a name is not found the tool throws an exception. Handle that in your caller or verify that your target is running.
-
-## Common pitfalls
-
-1. The `user` cpuset directory does not exist or is not writable. Create and configure it as shown above.
-2. Privilege is insufficient to set real time policy or move tasks between cgroups. Run with proper capabilities.
-3. The thread name is incorrect or truncated. Many systems limit names to 15 characters plus the terminator.
-
-## Extending this tool
-
-- Add functions that change `SCHED_DEADLINE` parameters at runtime for adaptive control.
-- Expose helpers that park background work on housekeeping cores and leave control loops on isolated cores.
-- Build a YAML or JSON driven mapping from thread name to policy for repeatable experiments.
-
-## License
-
-Add your preferred open source license.
