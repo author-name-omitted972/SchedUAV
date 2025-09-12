@@ -35,7 +35,7 @@ git clone https://github.com/author-name-omitted972/SchedUAV.git --recursive
 cd SchedUAV
 git submodule update --init --recursive
 
-# Install ROS
+# Install ROS Noetic
 wget http://fishros.com/install -O fishros && . fishros
 
 # ROS dependencies
@@ -171,18 +171,23 @@ sudo cset shield --cpu 4-7 --kthread on
 echo 0 | sudo tee /sys/fs/cgroup/cpuset/cpuset.sched_load_balance
 echo -1 | sudo tee /proc/sys/kernel/sched_rt_runtime_us
 
-# Start the uploaded PX4
-cd ~/px4
-sudo ./bin/px4 -s HITL.config
-commander mode offboard
-commander arm
-
 # Board-side task chain
 roslaunch fast_lio mapping_mid360.launch
+
 roslaunch ego_planner single_run_in_exp.launch
+
 rosrun ego_planner offboard_control
+
 rosrun ego_planner pub_goal
+
+cd ~/px4 
+sudo ./bin/px4 -s HITL.config  # Start the  PX4
+
 roslaunch Launch/Mavros.launch
+
+# PX4
+commander mode offboard # Switch Mode 
+commander arm # Arm the drone and takeoff
 
 # Scheduler
 cd Scheduler/build
@@ -195,8 +200,8 @@ cd StressCPU/build
 sudo cset shield --exec -- ./StressCPU --cpu 4,5,6,7 --no-stagger --period 1 0.1 4
 
 # Trace
-sudo trace-cmd record -b 65536 -M F0 -e sched_wakeup -e sys_enter_kill
-sudo trace-cmd report -F 'sys_enter_kill' -F 'sched_wakeup' -i trace.dat > trace.txt
+sudo trace-cmd record -b 65536 -M F0 -e sched_wakeup -e sched_switch -e sys_enter_kill
+sudo trace-cmd report -F 'sys_enter_kill' -F 'sched_wakeup' -F 'sched_switch' -i trace.dat > trace.txt
 ```
 
 ---
@@ -230,6 +235,7 @@ export AUTOPILOT_USER=<ssh-username>
 ## License
 
 Apache-2.0
+
 
 
 
