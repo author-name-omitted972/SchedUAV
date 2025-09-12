@@ -174,6 +174,8 @@ echo -1 | sudo tee /proc/sys/kernel/sched_rt_runtime_us
 # Start the uploaded PX4
 cd ~/px4
 sudo ./bin/px4 -s HITL.config
+commander mode offboard
+commander arm
 
 # Board-side task chain
 roslaunch fast_lio mapping_mid360.launch
@@ -228,6 +230,7 @@ export AUTOPILOT_USER=<ssh-username>
 ## License
 
 Apache-2.0
+
 
 
 
