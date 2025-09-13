@@ -1,6 +1,6 @@
 # SchedUAV 
 ```text
-This is an end-to-end evaluation framework for UAVs developed by Sun Yat-sen University.
+This is an end-to-end simulation framework for UAVs.
 ```
 
 
@@ -234,6 +234,7 @@ export AUTOPILOT_USER=<ssh-username>
 ## License
 
 Apache-2.0
+
 
 
 
