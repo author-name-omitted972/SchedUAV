@@ -227,14 +227,14 @@ export AUTOPILOT_USER=<ssh-username>
 ## FAQ
 
 - Plugin/model not found: verify `GAZEBO_PLUGIN_PATH / GAZEBO_MODEL_PATH / LD_LIBRARY_PATH` point to PX4 build and Model paths.  
-- MAVROS GeographicLib error: run `/opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh` **on both ends**.  
-- Large jitter/latency: fix CPU freq/pin cores on Host, isolate background services; lower sim resolution/textures/lighting.
+- MAVROS GeographicLib error: run `/opt/ros/noetic/lib/mavros/install_geographiclib_datasets.sh` on board.  
 
 ---
 
 ## License
 
 Apache-2.0
+
 
 
 
