@@ -210,9 +210,6 @@ sudo trace-cmd report -F 'sys_enter_kill' -F 'sched_wakeup' -F 'sched_switch' -i
 ```bash
 # ROS
 source /opt/ros/noetic/setup.bash
-source ${REPO_ROOT}/ROS/livox_ws/devel/setup.sh
-source ${REPO_ROOT}/ROS/fastlio_ws/devel/setup.sh
-source ${REPO_ROOT}/ROS/egoplanner_ws/devel/setup.sh
 source ${REPO_ROOT}/ROS/mid360_gazebo_ws/devel/setup.sh
 source ${REPO_ROOT}/ROS/realsense_gazebo_ws/devel/setup.sh
 
@@ -238,6 +235,7 @@ export AUTOPILOT_USER=<ssh-username>
 ## License
 
 Apache-2.0
+
 
 
 
