@@ -93,6 +93,7 @@ bash PX4-Autopilot/Tools/setup/ubuntu.sh --no-nuttx
 export AUTOPILOT_HOST=<board-host-or-ip>
 export AUTOPILOT_USER=<ssh-username>
 
+DONT_RUN=1 make px4_sitl_default gazebo-classic
 make firefly_rk3588s_arm64
 make firefly_rk3588s_arm64 upload
 ```
@@ -235,6 +236,7 @@ export AUTOPILOT_USER=<ssh-username>
 ## License
 
 Apache-2.0
+
 
 
 
