@@ -159,7 +159,6 @@ export ROS_IP=BOARD_IP
 
 ```bash
 # Gazebo world (folders are Launch/Model/World)
-REPO_ROOT=$(pwd)
 roslaunch Launch/Gazebo.launch world_name:=${REPO_ROOT}/World/Forest.world
 ```
 
@@ -209,8 +208,13 @@ sudo trace-cmd report -F 'sys_enter_kill' -F 'sched_wakeup' -F 'sched_switch' -i
 ## Environment Variables & Configuration (Host example)
 
 ```bash
-# Use repo root as base
-export REPO_ROOT=$(pwd)
+# ROS
+source /opt/ros/noetic/setup.bash
+source ${REPO_ROOT}/ROS/livox_ws/devel/setup.sh
+source ${REPO_ROOT}/ROS/fastlio_ws/devel/setup.sh
+source ${REPO_ROOT}/ROS/egoplanner_ws/devel/setup.sh
+source ${REPO_ROOT}/ROS/mid360_gazebo_ws/devel/setup.sh
+source ${REPO_ROOT}/ROS/realsense_gazebo_ws/devel/setup.sh
 
 # Gazebo
 export GAZEBO_PLUGIN_PATH=${REPO_ROOT}/PX4-Autopilot/build/px4_sitl_default/build_gazebo-classic
@@ -234,6 +238,7 @@ export AUTOPILOT_USER=<ssh-username>
 ## License
 
 Apache-2.0
+
 
 
 
